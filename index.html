@@ -1,0 +1,140 @@
+<!doctype html><html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="refresh" content="60">
+<title>uMoya HPC</title>
+<style>
+:root{
+  --bg:#f6f7f9; --surface:#fff; --surface2:#eef0f3; --ink:#1a1d21; --ink2:#5a6270; --muted:#98a0ac;
+  --line:#e4e7ec; --good:#15803d; --goodbg:#dcfce7; --run:#1d4ed8; --runbg:#dbeafe;
+  --queue:#6b7280; --queuebg:#eef0f3; --crit:#b91c1c; --critbg:#fee2e2; --accent:#4f46e5;
+}
+@media (prefers-color-scheme:dark){:root{
+  --bg:#0e1116; --surface:#171b21; --surface2:#20262f; --ink:#e6e9ee; --ink2:#a3acba; --muted:#69727f;
+  --line:#262c35; --good:#34d399; --goodbg:#0c2a20; --run:#60a5fa; --runbg:#0e2036;
+  --queue:#94a3b8; --queuebg:#1a1f27; --crit:#f87171; --critbg:#33161a; --accent:#818cf8;
+}}
+*{box-sizing:border-box}
+body{margin:0;font:15px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  background:var(--bg);color:var(--ink);-webkit-font-smoothing:antialiased;padding:14px;max-width:920px;margin:0 auto}
+h1{font-size:17px;margin:0;font-weight:650;letter-spacing:-.01em}
+.sub{color:var(--ink2);font-size:12.5px;margin-top:2px}
+.hdr{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;margin-bottom:14px;flex-wrap:wrap}
+.stamp{font-size:12px;color:var(--ink2);text-align:right;white-space:nowrap}
+.stamp b{color:var(--ink)} .stale{color:var(--crit)!important}
+.tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:8px;margin-bottom:14px}
+.tile{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:10px 12px}
+.tile .t{font-size:11px;color:var(--ink2);text-transform:uppercase;letter-spacing:.04em}
+.tile .v{font-size:19px;font-weight:640;margin-top:3px} .tile .m{font-size:11.5px;color:var(--muted);margin-top:1px}
+.study{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:13px 15px;margin-bottom:12px}
+details.study>summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:10px}
+details.study>summary::-webkit-details-marker{display:none}
+details.study>summary .st{font-weight:640;font-size:15px}
+details.study>summary .sm{font-size:12px;color:var(--ink2);display:flex;align-items:center;gap:7px;white-space:nowrap;font-variant-numeric:tabular-nums}
+details.study>summary .chev{transition:transform .15s;color:var(--muted);font-size:15px}
+details.study[open]>summary{border-bottom:1px solid var(--line);padding-bottom:11px;margin-bottom:11px}
+details.study[open]>summary .chev{transform:rotate(90deg)}
+.study .tgt{font-size:12px;color:var(--ink2);white-space:nowrap}
+.study .desc{font-size:12.5px;color:var(--ink2);margin:0 0 8px}
+.summary{display:flex;flex-wrap:wrap;gap:5px 8px;font-size:12px;margin-bottom:7px}
+.pill{background:var(--surface2);border-radius:20px;padding:2px 9px;font-weight:560}
+.pill.e{color:var(--accent)}
+.note{font-size:11.5px;color:var(--muted);margin-bottom:3px} .accept{font-size:11.5px;color:var(--ink2);margin-bottom:9px}
+.accept b{color:var(--ink);font-weight:600}
+.arm{padding:8px 0;border-top:1px solid var(--line)} .arm:first-of-type{border-top:none}
+.arow{display:flex;justify-content:space-between;align-items:center;gap:8px}
+.arm .name{font-weight:580;font-size:13.5px} .arm .name .c{color:var(--muted);font-weight:400;font-size:11.5px}
+.det2{font-size:12px;color:var(--ink2);margin-top:3px;font-variant-numeric:tabular-nums}
+.chip{font-size:11px;font-weight:640;padding:2px 8px;border-radius:20px;white-space:nowrap}
+.c-good{color:var(--good);background:var(--goodbg)} .c-run{color:var(--run);background:var(--runbg)}
+.c-queue{color:var(--queue);background:var(--queuebg)} .c-crit{color:var(--crit);background:var(--critbg)}
+.bar{height:6px;background:var(--surface2);border-radius:4px;overflow:hidden;margin-top:5px}
+.bar>i{display:block;height:100%;border-radius:4px;background:var(--run)}
+.fig{margin-top:9px;font-size:11.5px;color:var(--muted)} .fig img{max-width:100%;border-radius:8px;border:1px solid var(--line);margin-top:5px;display:block}
+.foot{color:var(--muted);font-size:11.5px;text-align:center;margin-top:16px} a{color:var(--accent)}
+</style></head><body>
+<div class="hdr"><div><h1>uMoya HPC</h1><div class="sub">recipe <b>v6.1+d352b93</b></div></div><div class="stamp">updated <b id="upd">19:59:15Z</b><br><span id="ago" data-epoch="1786219155"></span></div></div>
+<div class="tiles">
+<div class="tile"><div class="t">cx3 · pbs</div><div class="v">0 ▶ · 0 ⏳</div><div class="m">queue depth 563</div></div>
+</div>
+<details class="study"><summary><span><span class="st">r1_rung1</span> <span class="tgt">cx3:A100</span></span><span class="sm">20✓ <span class="chev">›</span></span></summary>
+<div class="desc">R1 (formal): isentropic-vortex order of accuracy, convergence + order-vs-time to t=30 (3 periods); moving/static-advected/static-stationary/zero-motion decomposition, ladder N=64..256, nz=4 slab (v6.1). Energy accounted per arm.</div>
+<div class="summary"><span class="pill">20 arms</span><span class="pill">20 done</span><span class="pill">0 running</span><span class="pill">0 queued</span></div>
+<div class="note">ⓘ arms are independent A100 jobs — submitted together, run in parallel as GPUs free (not sequential)</div>
+<div class="accept"><b>passes when:</b> every arm reaches t=30 exit 0 at machine-eps conservation and A2 volume gate &lt;1e-12. (a) mv holds design ~3rd order flat past the transient and stays below st at every resolution; (b) stat shows the early dip AND recovers to design (IC-settling); (c) zero reproduces the static order, not ~2.0. PRE-DISPATCH GATE: mv_n64 must reach t=30 UNFLIPPABLE-free at nz=4 or the ladder reverts to nz=6.</div>
+<div class="arm"><div class="arow">
+<span class="name">mv_n128 <span class="c">66k cells</span></span><span class="chip c-good">✓ PASS</span></div>
+<div class="det2">step 1963 · reached t=30.000000 · wall 00:03:28</div></div>
+<div class="arm"><div class="arow">
+<span class="name">mv_n192 <span class="c">147k cells</span></span><span class="chip c-good">✓ PASS</span></div>
+<div class="det2">step 2926 · reached t=30.000000 · wall 00:08:02</div></div>
+<div class="arm"><div class="arow">
+<span class="name">mv_n256 <span class="c">262k cells</span></span><span class="chip c-good">✓ PASS</span></div>
+<div class="det2">step 3840 · reached t=30.000000 · wall 00:15:05</div></div>
+<div class="arm"><div class="arow">
+<span class="name">mv_n64 <span class="c">16k cells</span></span><span class="chip c-good">✓ PASS</span></div>
+<div class="det2">step 1053 · reached t=30.000000 · wall 00:01:08</div></div>
+<div class="arm"><div class="arow">
+<span class="name">mv_n96 <span class="c">37k cells</span></span><span class="chip c-good">✓ PASS</span></div>
+<div class="det2">step 1497 · reached t=30.000000 · wall 00:02:07</div></div>
+<div class="arm"><div class="arow">
+<span class="name">stat_n128 <span class="c">66k cells</span></span><span class="chip c-good">✓ PASS</span></div>
+<div class="det2">step 2660 · reached t=30.000000 · wall 00:00:38</div></div>
+<div class="arm"><div class="arow">
+<span class="name">stat_n192 <span class="c">147k cells</span></span><span class="chip c-good">✓ PASS</span></div>
+<div class="det2">step 4131 · reached t=30.000000 · wall 00:01:42</div></div>
+<div class="arm"><div class="arow">
+<span class="name">stat_n256 <span class="c">262k cells</span></span><span class="chip c-good">✓ PASS</span></div>
+<div class="det2">step 5360 · reached t=30.000000 · wall 00:03:29</div></div>
+<div class="arm"><div class="arow">
+<span class="name">stat_n64 <span class="c">16k cells</span></span><span class="chip c-good">✓ PASS</span></div>
+<div class="det2">step 1340 · reached t=30.000000 · wall 00:00:13</div></div>
+<div class="arm"><div class="arow">
+<span class="name">stat_n96 <span class="c">37k cells</span></span><span class="chip c-good">✓ PASS</span></div>
+<div class="det2">step 2020 · reached t=30.000000 · wall 00:00:23</div></div>
+<div class="arm"><div class="arow">
+<span class="name">st_n128 <span class="c">66k cells</span></span><span class="chip c-good">✓ PASS</span></div>
+<div class="det2">step 4311 · reached t=30.000000 · wall 00:00:54</div></div>
+<div class="arm"><div class="arow">
+<span class="name">st_n192 <span class="c">147k cells</span></span><span class="chip c-good">✓ PASS</span></div>
+<div class="det2">step 6604 · reached t=30.000000 · wall 00:02:32</div></div>
+<div class="arm"><div class="arow">
+<span class="name">st_n256 <span class="c">262k cells</span></span><span class="chip c-good">✓ PASS</span></div>
+<div class="det2">step 8948 · reached t=30.000000 · wall 00:05:35</div></div>
+<div class="arm"><div class="arow">
+<span class="name">st_n64 <span class="c">16k cells</span></span><span class="chip c-good">✓ PASS</span></div>
+<div class="det2">step 2097 · reached t=30.000000 · wall 00:00:16</div></div>
+<div class="arm"><div class="arow">
+<span class="name">st_n96 <span class="c">37k cells</span></span><span class="chip c-good">✓ PASS</span></div>
+<div class="det2">step 3304 · reached t=30.000000 · wall 00:00:31</div></div>
+<div class="arm"><div class="arow">
+<span class="name">zero_n128 <span class="c">66k cells</span></span><span class="chip c-good">✓ PASS</span></div>
+<div class="det2">step 4304 · reached t=30.000000 · wall 00:02:22</div></div>
+<div class="arm"><div class="arow">
+<span class="name">zero_n192 <span class="c">147k cells</span></span><span class="chip c-good">✓ PASS</span></div>
+<div class="det2">step 6585 · reached t=30.000000 · wall 00:07:03</div></div>
+<div class="arm"><div class="arow">
+<span class="name">zero_n256 <span class="c">262k cells</span></span><span class="chip c-good">✓ PASS</span></div>
+<div class="det2">step 8932 · reached t=30.000000 · wall 00:15:55</div></div>
+<div class="arm"><div class="arow">
+<span class="name">zero_n64 <span class="c">16k cells</span></span><span class="chip c-good">✓ PASS</span></div>
+<div class="det2">step 2089 · reached t=30.000000 · wall 00:00:31</div></div>
+<div class="arm"><div class="arow">
+<span class="name">zero_n96 <span class="c">37k cells</span></span><span class="chip c-good">✓ PASS</span></div>
+<div class="det2">step 3284 · reached t=30.000000 · wall 00:01:13</div></div>
+<div class="fig">figure (when passed): <code>harvest error_history.csv -&gt; figures/data/r1/DATA-r1rung1-&lt;date&gt;.csv; render fig_order_3d_conv (L2 vs h) + fig_order_vs_time (p vs t) = paper figure 11 (a),(b).</code></div>
+</details>
+<details class="study" open><summary><span><span class="st">Other cluster jobs</span> <span class="tgt">not layer-managed</span></span><span class="sm">2 job(s)<span class="chev">›</span></span></summary>
+<div class="desc">certifications, profiling, and hand-submitted runs — not part of a study, shown so nothing is invisible</div>
+<div class="arm"><div class="arow">
+<span class="name">jw_vert <span class="c">typhoon · 147761</span></span><span class="chip c-queue">⏳ QUEUED</span></div></div>
+<div class="arm"><div class="arow">
+<span class="name">jw_vert <span class="c">typhoon · 147760</span></span><span class="chip c-queue">⏳ QUEUED</span></div></div>
+</details>
+<div class="foot">uMoya HPC layer · auto-refresh 60s · generated 2026-08-08T19:59:15Z</div>
+<script>
+function tick(){var e=document.getElementById('ago');if(!e)return;
+var d=Math.floor(Date.now()/1000)-(+e.dataset.epoch);
+var s=d<60?d+'s ago':d<3600?Math.floor(d/60)+'m ago':Math.floor(d/3600)+'h '+Math.floor(d%3600/60)+'m ago';
+e.textContent=s;e.className=d>300?'stale':'';var u=document.getElementById('upd');if(u&&d>300)u.className='stale';}
+tick();setInterval(tick,1000);
+</script></body></html>
