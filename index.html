@@ -1,0 +1,138 @@
+<!doctype html><html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="refresh" content="60">
+<title>uMoya HPC</title>
+<style>
+:root{
+  --bg:#f6f7f9; --surface:#fff; --surface2:#eef0f3; --ink:#1a1d21; --ink2:#5a6270; --muted:#98a0ac;
+  --line:#e4e7ec; --good:#15803d; --goodbg:#dcfce7; --run:#1d4ed8; --runbg:#dbeafe;
+  --queue:#6b7280; --queuebg:#eef0f3; --crit:#b91c1c; --critbg:#fee2e2; --accent:#4f46e5;
+}
+@media (prefers-color-scheme:dark){:root{
+  --bg:#0e1116; --surface:#171b21; --surface2:#20262f; --ink:#e6e9ee; --ink2:#a3acba; --muted:#69727f;
+  --line:#262c35; --good:#34d399; --goodbg:#0c2a20; --run:#60a5fa; --runbg:#0e2036;
+  --queue:#94a3b8; --queuebg:#1a1f27; --crit:#f87171; --critbg:#33161a; --accent:#818cf8;
+}}
+*{box-sizing:border-box}
+body{margin:0;font:15px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  background:var(--bg);color:var(--ink);-webkit-font-smoothing:antialiased;padding:14px;max-width:920px;margin:0 auto}
+h1{font-size:17px;margin:0;font-weight:650;letter-spacing:-.01em}
+.sub{color:var(--ink2);font-size:12.5px;margin-top:2px}
+.hdr{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;margin-bottom:14px;flex-wrap:wrap}
+.stamp{font-size:12px;color:var(--ink2);text-align:right;white-space:nowrap}
+.stamp b{color:var(--ink)} .stale{color:var(--crit)!important}
+.tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:8px;margin-bottom:14px}
+.tile{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:10px 12px}
+.tile .t{font-size:11px;color:var(--ink2);text-transform:uppercase;letter-spacing:.04em}
+.tile .v{font-size:19px;font-weight:640;margin-top:3px} .tile .m{font-size:11.5px;color:var(--muted);margin-top:1px}
+.study{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:13px 15px;margin-bottom:12px}
+details.study>summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:10px}
+details.study>summary::-webkit-details-marker{display:none}
+details.study>summary .st{font-weight:640;font-size:15px}
+details.study>summary .sm{font-size:12px;color:var(--ink2);display:flex;align-items:center;gap:7px;white-space:nowrap;font-variant-numeric:tabular-nums}
+details.study>summary .chev{transition:transform .15s;color:var(--muted);font-size:15px}
+details.study[open]>summary{border-bottom:1px solid var(--line);padding-bottom:11px;margin-bottom:11px}
+details.study[open]>summary .chev{transform:rotate(90deg)}
+.study .tgt{font-size:12px;color:var(--ink2);white-space:nowrap}
+.study .desc{font-size:12.5px;color:var(--ink2);margin:0 0 8px}
+.summary{display:flex;flex-wrap:wrap;gap:5px 8px;font-size:12px;margin-bottom:7px}
+.pill{background:var(--surface2);border-radius:20px;padding:2px 9px;font-weight:560}
+.pill.e{color:var(--accent)}
+.note{font-size:11.5px;color:var(--muted);margin-bottom:3px} .accept{font-size:11.5px;color:var(--ink2);margin-bottom:9px}
+.accept b{color:var(--ink);font-weight:600}
+.arm{padding:8px 0;border-top:1px solid var(--line)} .arm:first-of-type{border-top:none}
+.arow{display:flex;justify-content:space-between;align-items:center;gap:8px}
+.arm .name{font-weight:580;font-size:13.5px} .arm .name .c{color:var(--muted);font-weight:400;font-size:11.5px}
+.det2{font-size:12px;color:var(--ink2);margin-top:3px;font-variant-numeric:tabular-nums}
+.chip{font-size:11px;font-weight:640;padding:2px 8px;border-radius:20px;white-space:nowrap}
+.c-good{color:var(--good);background:var(--goodbg)} .c-run{color:var(--run);background:var(--runbg)}
+.c-queue{color:var(--queue);background:var(--queuebg)} .c-crit{color:var(--crit);background:var(--critbg)}
+.bar{height:6px;background:var(--surface2);border-radius:4px;overflow:hidden;margin-top:5px}
+.bar>i{display:block;height:100%;border-radius:4px;background:var(--run)}
+.fig{margin-top:9px;font-size:11.5px;color:var(--muted)} .fig img{max-width:100%;border-radius:8px;border:1px solid var(--line);margin-top:5px;display:block}
+.foot{color:var(--muted);font-size:11.5px;text-align:center;margin-top:16px} a{color:var(--accent)}
+</style></head><body>
+<div class="hdr"><div><h1>uMoya HPC</h1><div class="sub">recipe <b>v9.0+01bdc60</b></div></div><div class="stamp">updated <b id="upd">15:39:46Z</b><br><span id="ago" data-epoch="1786981186"></span></div></div>
+<div class="tiles">
+<div class="tile"><div class="t">gh200 · slurm</div><div class="v">1 ▶ · 2 ⏳</div><div class="m">queue depth 2</div></div>
+</div>
+<details class="study" open><summary><span><span class="st">r1_rung2</span> <span class="tgt">gh200:nvidia_gh200</span></span><span class="sm">1▶ 1⏳ 18✓ <span class="chev">›</span></span></summary>
+<div class="desc">R1 rung 2 (production): isentropic-vortex order of accuracy on the EXTENDED ladder N=32..512(768), N^2 x 4 slab, to t=100 (10 periods). Moving (L_ALAUZET) vs static (Eulerian), BOTH with 8 umbrella relaxation sweeps so the comparison is controlled. Deliverables: (a) L2 vs h with in-gate/out-of-gate marking, (b) the p-vs-sigma collapse showing order recovering to 3 as sigma falls below the gate, (c) the t=100 'trap' panel.</div>
+<div class="summary"><span class="pill">20 arms</span><span class="pill">18 done</span><span class="pill">1 running</span><span class="pill">1 queued</span></div>
+<div class="note">ⓘ arms are independent nvidia_gh200 jobs — submitted together, run in parallel as GPUs free (not sequential)</div>
+<div class="accept"><b>passes when:</b> every arm reaches t=100 exit 0, conservation at machine eps, A2 volume gate &lt; 1e-3 of the measured relative error E/rho_inf on the same arm (every arm to N=768 passes this with &gt;=3 orders to spare; the superseded fixed 1e-12 form is breached from N=384 by FP conditioning, see the note above). THE ORDER CRITERION: at t=100 the three grids (256,384,512) must all sit at sigma&lt;=0.02 on BOTH arms and their LSQ order (ln E vs ln h) must be &gt;=2.90 with max residual &lt;0.01 in ln E. Predicted BEFORE the runs (pre-registered, similarity law + measured local p): static L2 at t=100 = 2.51-2.55e-4 (N=384) and 1.06-1.09e-4 (N=512); moving = 1.11-1.13e-4 and 4.70-4.83e-5. Landing outside those bands FALSIFIES the similarity law and must be reported, not absorbed. SECONDARY: the p-vs-sigma collapse must hold across both arms to &lt;0.05 in p per sigma bin.</div>
+<div class="arm"><div class="arow">
+<span class="name">mv_n32 <span class="c">4k cells</span></span><span class="chip c-good">✓ PASS</span></div>
+<div class="det2">step 1593 · reached t=100.000000</div></div>
+<div class="arm"><div class="arow">
+<span class="name">mv_n48 <span class="c">9k cells</span></span><span class="chip c-good">✓ PASS</span></div>
+<div class="det2">step 2405 · reached t=100.000000</div></div>
+<div class="arm"><div class="arow">
+<span class="name">mv_n64 <span class="c">16k cells</span></span><span class="chip c-good">✓ PASS</span></div>
+<div class="det2">step 3176 · reached t=100.000000</div></div>
+<div class="arm"><div class="arow">
+<span class="name">mv_n96 <span class="c">37k cells</span></span><span class="chip c-good">✓ PASS</span></div>
+<div class="det2">step 4615 · reached t=100.000000</div></div>
+<div class="arm"><div class="arow">
+<span class="name">mv_n128 <span class="c">66k cells</span></span><span class="chip c-good">✓ PASS</span></div>
+<div class="det2">step 6068 · reached t=100.000000</div></div>
+<div class="arm"><div class="arow">
+<span class="name">mv_n192 <span class="c">147k cells</span></span><span class="chip c-good">✓ PASS</span></div>
+<div class="det2">step 9019 · reached t=100.000000</div></div>
+<div class="arm"><div class="arow">
+<span class="name">mv_n256 <span class="c">262k cells</span></span><span class="chip c-good">✓ PASS</span></div>
+<div class="det2">step 12230 · reached t=100.000000</div></div>
+<div class="arm"><div class="arow">
+<span class="name">mv_n384 <span class="c">590k cells</span></span><span class="chip c-good">✓ PASS</span></div>
+<div class="det2">step 17859 · reached t=100.000000</div></div>
+<div class="arm"><div class="arow">
+<span class="name">mv_n512 <span class="c">1.05M cells</span></span><span class="chip c-good">✓ PASS</span></div>
+<div class="det2">step 23771 · reached t=100.000000</div></div>
+<div class="arm"><div class="arow">
+<span class="name">mv_n768 <span class="c">2.36M cells</span></span><span class="chip c-run">▶ RUNNING</span></div>
+<div class="det2">step 33900 · t=95.210175/100 · 95% · dt 2.846e-03 · 382.26W · wall 9:12:30 · ETA ~29m</div><div class="bar"><i style="width:95%"></i></div></div>
+<div class="arm"><div class="arow">
+<span class="name">st_n32 <span class="c">4k cells</span></span><span class="chip c-good">✓ PASS</span></div>
+<div class="det2">step 3146 · reached t=100.000000</div></div>
+<div class="arm"><div class="arow">
+<span class="name">st_n48 <span class="c">9k cells</span></span><span class="chip c-good">✓ PASS</span></div>
+<div class="det2">step 5207 · reached t=100.000000</div></div>
+<div class="arm"><div class="arow">
+<span class="name">st_n64 <span class="c">16k cells</span></span><span class="chip c-good">✓ PASS</span></div>
+<div class="det2">step 6966 · reached t=100.000000</div></div>
+<div class="arm"><div class="arow">
+<span class="name">st_n96 <span class="c">37k cells</span></span><span class="chip c-good">✓ PASS</span></div>
+<div class="det2">step 11167 · reached t=100.000000</div></div>
+<div class="arm"><div class="arow">
+<span class="name">st_n128 <span class="c">66k cells</span></span><span class="chip c-good">✓ PASS</span></div>
+<div class="det2">step 15599 · reached t=100.000000</div></div>
+<div class="arm"><div class="arow">
+<span class="name">st_n192 <span class="c">147k cells</span></span><span class="chip c-good">✓ PASS</span></div>
+<div class="det2">step 23857 · reached t=100.000000</div></div>
+<div class="arm"><div class="arow">
+<span class="name">st_n256 <span class="c">262k cells</span></span><span class="chip c-good">✓ PASS</span></div>
+<div class="det2">step 33270 · reached t=100.000000</div></div>
+<div class="arm"><div class="arow">
+<span class="name">st_n384 <span class="c">590k cells</span></span><span class="chip c-good">✓ PASS</span></div>
+<div class="det2">step 52266 · reached t=100.000000</div></div>
+<div class="arm"><div class="arow">
+<span class="name">st_n512 <span class="c">1.05M cells</span></span><span class="chip c-good">✓ PASS</span></div>
+<div class="det2">step 76931 · reached t=100.000000</div></div>
+<div class="arm"><div class="arow">
+<span class="name">st_n768 <span class="c">2.36M cells</span></span><span class="chip c-queue">⏳ QUEUED</span></div>
+<div class="det2">waiting for an A100 slot · est 2026-08-17T18:27</div></div>
+<div class="fig">figure (when passed): <code>harvest error_history.csv -&gt; figures/data/r1/DATA-r1rung2-&lt;date&gt;.csv; analyse with studies/spatial_order_inviscid/asymptotic_range.py; render fig_r1_convergence (L2 vs h, in-gate solid / out-of-gate hollow) + fig_order_vs_sigma (the collapse + gate) + the t=100 trap table.</code></div>
+</details>
+<details class="study" open><summary><span><span class="st">Other cluster jobs</span> <span class="tgt">not layer-managed</span></span><span class="sm">1 job(s)<span class="chev">›</span></span></summary>
+<div class="desc">certifications, profiling, and hand-submitted runs — not part of a study, shown so nothing is invisible</div>
+<div class="arm"><div class="arow">
+<span class="name">conf_gh200_nvidia_gh200 <span class="c">typhoon · 149386</span></span><span class="chip c-queue">⏳ QUEUED</span></div><div class="det2">est start 2026-08-18T01:28</div></div>
+</details>
+<div class="foot">uMoya HPC layer · auto-refresh 60s · generated 2026-08-17T15:39:46Z</div>
+<script>
+function tick(){var e=document.getElementById('ago');if(!e)return;
+var d=Math.floor(Date.now()/1000)-(+e.dataset.epoch);
+var s=d<60?d+'s ago':d<3600?Math.floor(d/60)+'m ago':Math.floor(d/3600)+'h '+Math.floor(d%3600/60)+'m ago';
+e.textContent=s;e.className=d>300?'stale':'';var u=document.getElementById('upd');if(u&&d>300)u.className='stale';}
+tick();setInterval(tick,1000);
+</script></body></html>
