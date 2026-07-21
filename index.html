@@ -1,0 +1,96 @@
+<!doctype html><html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="refresh" content="60">
+<title>uMoya HPC</title>
+<style>
+:root{
+  --bg:#f6f7f9; --surface:#fff; --surface2:#eef0f3; --ink:#1a1d21; --ink2:#5a6270; --muted:#98a0ac;
+  --line:#e4e7ec; --good:#15803d; --goodbg:#dcfce7; --run:#1d4ed8; --runbg:#dbeafe;
+  --queue:#6b7280; --queuebg:#eef0f3; --crit:#b91c1c; --critbg:#fee2e2; --accent:#4f46e5;
+}
+@media (prefers-color-scheme:dark){:root{
+  --bg:#0e1116; --surface:#171b21; --surface2:#20262f; --ink:#e6e9ee; --ink2:#a3acba; --muted:#69727f;
+  --line:#262c35; --good:#34d399; --goodbg:#0c2a20; --run:#60a5fa; --runbg:#0e2036;
+  --queue:#94a3b8; --queuebg:#1a1f27; --crit:#f87171; --critbg:#33161a; --accent:#818cf8;
+}}
+*{box-sizing:border-box}
+body{margin:0;font:15px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  background:var(--bg);color:var(--ink);-webkit-font-smoothing:antialiased;padding:14px;max-width:920px;margin:0 auto}
+h1{font-size:17px;margin:0;font-weight:650;letter-spacing:-.01em}
+.sub{color:var(--ink2);font-size:12.5px;margin-top:2px}
+.hdr{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;margin-bottom:14px;flex-wrap:wrap}
+.stamp{font-size:12px;color:var(--ink2);text-align:right;white-space:nowrap}
+.stamp b{color:var(--ink)} .stale{color:var(--crit)!important}
+.tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:8px;margin-bottom:14px}
+.tile{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:10px 12px}
+.tile .t{font-size:11px;color:var(--ink2);text-transform:uppercase;letter-spacing:.04em}
+.tile .v{font-size:19px;font-weight:640;margin-top:3px} .tile .m{font-size:11.5px;color:var(--muted);margin-top:1px}
+.study{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:13px 15px;margin-bottom:12px}
+details.study>summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:10px}
+details.study>summary::-webkit-details-marker{display:none}
+details.study>summary .st{font-weight:640;font-size:15px}
+details.study>summary .sm{font-size:12px;color:var(--ink2);display:flex;align-items:center;gap:7px;white-space:nowrap;font-variant-numeric:tabular-nums}
+details.study>summary .chev{transition:transform .15s;color:var(--muted);font-size:15px}
+details.study[open]>summary{border-bottom:1px solid var(--line);padding-bottom:11px;margin-bottom:11px}
+details.study[open]>summary .chev{transform:rotate(90deg)}
+.study .tgt{font-size:12px;color:var(--ink2);white-space:nowrap}
+.study .desc{font-size:12.5px;color:var(--ink2);margin:0 0 8px}
+.summary{display:flex;flex-wrap:wrap;gap:5px 8px;font-size:12px;margin-bottom:7px}
+.pill{background:var(--surface2);border-radius:20px;padding:2px 9px;font-weight:560}
+.pill.e{color:var(--accent)}
+.note{font-size:11.5px;color:var(--muted);margin-bottom:3px} .accept{font-size:11.5px;color:var(--ink2);margin-bottom:9px}
+.accept b{color:var(--ink);font-weight:600}
+.arm{padding:8px 0;border-top:1px solid var(--line)} .arm:first-of-type{border-top:none}
+.arow{display:flex;justify-content:space-between;align-items:center;gap:8px}
+.arm .name{font-weight:580;font-size:13.5px} .arm .name .c{color:var(--muted);font-weight:400;font-size:11.5px}
+.det2{font-size:12px;color:var(--ink2);margin-top:3px;font-variant-numeric:tabular-nums}
+.chip{font-size:11px;font-weight:640;padding:2px 8px;border-radius:20px;white-space:nowrap}
+.c-good{color:var(--good);background:var(--goodbg)} .c-run{color:var(--run);background:var(--runbg)}
+.c-queue{color:var(--queue);background:var(--queuebg)} .c-crit{color:var(--crit);background:var(--critbg)}
+.bar{height:6px;background:var(--surface2);border-radius:4px;overflow:hidden;margin-top:5px}
+.bar>i{display:block;height:100%;border-radius:4px;background:var(--run)}
+.fig{margin-top:9px;font-size:11.5px;color:var(--muted)} .fig img{max-width:100%;border-radius:8px;border:1px solid var(--line);margin-top:5px;display:block}
+.foot{color:var(--muted);font-size:11.5px;text-align:center;margin-top:16px} a{color:var(--accent)}
+</style></head><body>
+<div class="hdr"><div><h1>uMoya HPC</h1><div class="sub">recipe <b>v1.2+fda2bef</b></div></div><div class="stamp">updated <b id="upd">18:51:15Z</b><br><span id="ago" data-epoch="1784919075"></span></div></div>
+<div class="tiles">
+<div class="tile"><div class="t">cx3 · pbs</div><div class="v">0 ▶ · 0 ⏳</div><div class="m">queue depth 415</div></div>
+</div>
+<details class="study"><summary><span><span class="st">r1_order</span> <span class="tgt">cx3:A100</span></span><span class="sm">8✓ · 0.0117 kWh <span class="chev">›</span></span></summary>
+<div class="desc">R1: 3D order sweep at t=3, moving (through-cascade) vs static, EIso3DJ N=16/32/64/128 (N^3 cells)</div>
+<div class="summary"><span class="pill">8 arms</span><span class="pill">8 done</span><span class="pill">0 running</span><span class="pill">0 queued</span><span class="pill e">0.0117 kWh</span></div>
+<div class="note">ⓘ arms are independent A100 jobs — submitted together, run in parallel as GPUs free (not sequential)</div>
+<div class="accept"><b>passes when:</b> all arms reach the common t_final=3; static slope -&gt; ~3rd (design) order over the finer levels; moving &gt;= static at matched N; L2 vs exact_isentropic_vortex(t=3) computed OFFLINE by the harvest builder</div>
+<div class="arm"><div class="arow">
+<span class="name">r1_mr_n128 <span class="c">2.10M cells</span></span><span class="chip c-crit">✗ FAIL</span></div><div class="det2">step ? · 42k flips · 0.002326 kWh</div></div>
+<div class="arm"><div class="arow">
+<span class="name">r1_mr_n16 <span class="c">4k cells</span></span><span class="chip c-good">✓ PASS</span></div>
+<div class="det2">step 27 · reached t=3.000000 · 9k flips · 0.000011 kWh</div></div>
+<div class="arm"><div class="arow">
+<span class="name">r1_mr_n32 <span class="c">33k cells</span></span><span class="chip c-good">✓ PASS</span></div>
+<div class="det2">step 59 · reached t=3.000000 · 85k flips · 0.000155 kWh</div></div>
+<div class="arm"><div class="arow">
+<span class="name">r1_mr_n64 <span class="c">262k cells</span></span><span class="chip c-good">✓ PASS</span></div>
+<div class="det2">step 125 · reached t=3.000000 · 709k flips · 0.002358 kWh</div></div>
+<div class="arm"><div class="arow">
+<span class="name">r1_s_n128 <span class="c">2.10M cells</span></span><span class="chip c-good">✓ PASS</span></div>
+<div class="det2">step 469 · reached t=3.000000 · 0 flips · 0.006553 kWh</div></div>
+<div class="arm"><div class="arow">
+<span class="name">r1_s_n16 <span class="c">4k cells</span></span><span class="chip c-good">✓ PASS</span></div>
+<div class="det2">step 48 · reached t=3.000000 · 0 flips · 0.000000 kWh</div></div>
+<div class="arm"><div class="arow">
+<span class="name">r1_s_n32 <span class="c">33k cells</span></span><span class="chip c-good">✓ PASS</span></div>
+<div class="det2">step 105 · reached t=3.000000 · 0 flips · 0.000007 kWh</div></div>
+<div class="arm"><div class="arow">
+<span class="name">r1_s_n64 <span class="c">262k cells</span></span><span class="chip c-good">✓ PASS</span></div>
+<div class="det2">step 232 · reached t=3.000000 · 0 flips · 0.000247 kWh</div></div>
+<div class="fig">figure (when passed): <code>uv run python figures/stills/fig_r1_order.py figs/r1_order ../uMoya/runs --tfinal 3   (paper repo)</code></div>
+</details>
+<div class="foot">uMoya HPC layer · auto-refresh 60s · generated 2026-07-24T18:51:15Z</div>
+<script>
+function tick(){var e=document.getElementById('ago');if(!e)return;
+var d=Math.floor(Date.now()/1000)-(+e.dataset.epoch);
+var s=d<60?d+'s ago':d<3600?Math.floor(d/60)+'m ago':Math.floor(d/3600)+'h '+Math.floor(d%3600/60)+'m ago';
+e.textContent=s;e.className=d>300?'stale':'';var u=document.getElementById('upd');if(u&&d>300)u.className='stale';}
+tick();setInterval(tick,1000);
+</script></body></html>
